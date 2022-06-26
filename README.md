@@ -196,7 +196,7 @@ export class PostService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-
+}
 ```
 
 UsersService:
@@ -223,7 +223,7 @@ export class UsersService {
   public async create(createUserDto: CreateUserDto): Promise<any> {
     try {
       const user = await this.dbConnection.query(
-        'INSERT INTO users (firstName, lastName) VALUES (?, ?)',
+        'INSERT INTO users (firstName, lastName)  VALUES (?, ?)',
         [createUserDto.firstName, createUserDto.lastName],
       );
       return user;
