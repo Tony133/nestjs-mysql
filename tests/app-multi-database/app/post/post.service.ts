@@ -59,11 +59,11 @@ export class PostService {
     try {
       const { title, description } = updateUserDto;
 
-      const posts = await this.dbConnection.query(
+      const post = await this.dbConnection.query(
         'UPDATE posts SET title=?, descriptions=? WHERE id=?',
         [title, description, id],
       );
-      return posts;
+      return post;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
