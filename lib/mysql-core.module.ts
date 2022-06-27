@@ -12,8 +12,8 @@ import {
   MysqlModuleOptions,
   MysqlOptionsFactory,
 } from './interfaces';
-import { getConnectionToken, handleRetry } from './common/Mysql.utils';
-import { MYSQL_MODULE_OPTIONS } from './Mysql.constants';
+import { getConnectionToken, handleRetry } from './common/mysql.utils';
+import { MYSQL_MODULE_OPTIONS } from './mysql.constants';
 import { ModuleRef } from '@nestjs/core';
 import { defer, lastValueFrom } from 'rxjs';
 import * as mysql from 'mysql2/promise';
