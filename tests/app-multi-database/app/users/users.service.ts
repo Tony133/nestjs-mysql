@@ -59,11 +59,11 @@ export class UsersService {
     try {
       const { firstName, lastName } = updateUserDto;
 
-      const users = await this.dbConnection.query(
+      const user = await this.dbConnection.query(
         'UPDATE users SET firstName=?, lastName=? WHERE id=?',
         [firstName, lastName, id],
       );
-      return users;
+      return user;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
@@ -74,10 +74,10 @@ export class UsersService {
       throw new BadRequestException();
     }
 
-    const users = await this.dbConnection.query(
+    const user = await this.dbConnection.query(
       'DELETE FROM users WHERE id=?',
       [id],
     );
-    return users;
+    return user;
   }
 }
