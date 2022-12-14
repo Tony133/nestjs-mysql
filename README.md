@@ -28,7 +28,7 @@ MySQL module for Nest framework (node.js) 😻
 
 ## Installation
 
-First install the module via `yarn` or `npm` and do not forget to install the driver package as well:
+First install the module via `yarn` or `npm` or `pnpm` and do not forget to install the driver package as well:
 
 
 ```bash
@@ -38,6 +38,12 @@ or
 
 ```bash
     $ yarn add nest-mysql mysql2
+```
+
+or
+
+```bash
+    $ pnpm add nest-mysql mysql2
 ```
 
 ## Table of Contents
