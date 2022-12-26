@@ -3,6 +3,7 @@ import { TestingModule, Test } from '@nestjs/testing';
 import { UsersModule } from './app-mysql/app/users/users.module';
 import { MysqlModule } from '../lib';
 import * as request from 'supertest';
+import { AppModule } from './app-mysql/app/app.module';
 
 describe('[Feature] User - /user', () => {
   let app: INestApplication;
@@ -11,13 +12,7 @@ describe('[Feature] User - /user', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         UsersModule,
-        MysqlModule.forRoot({
-          host: 'localhost',
-          database: 'nest',
-          password: 'root',
-          user: 'root',
-          port: 3306,
-        }),
+        AppModule
       ],
     }).compile();
 
