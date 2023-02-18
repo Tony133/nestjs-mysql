@@ -1,6 +1,6 @@
 {
   "name": "nest-mysql",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Mysql module for Nest framework (node.js) 😻",
   "author": "Tony133",
   "license": "MIT",
@@ -65,5 +65,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tony133/nestjs-mysql"
+  },
+  "dependencies": {
+    "uuid": "9.0.0"
   }
 }
