@@ -8,25 +8,29 @@ export class DatabaseModule {
     return {
       module: DatabaseModule,
       imports: [
-        MysqlModule.forRoot(
+        MysqlModule.forRootAsync(
           {
-            name: 'db1Connection',
-            host: '127.0.0.1',
-            database: 'test',
-            password: 'root',
-            user: 'root',
-            port: 3306,
+            useFactory: () => ({
+              name: 'db1Connection',
+              host: '127.0.0.1',
+              database: 'test',
+              password: 'root',
+              user: 'root',
+              port: 3306,
+            }),
           },
           'db1Connection',
         ),
-        MysqlModule.forRoot(
+        MysqlModule.forRootAsync(
           {
-            name: 'db2Connection',
-            host: '127.0.0.1',
-            database: 'test',
-            password: 'root',
-            user: 'root',
-            port: 3306,
+            useFactory: () => ({
+              name: 'db2Connection',
+              host: '127.0.0.1',
+              database: 'test',
+              password: 'root',
+              user: 'root',
+              port: 3306,
+            }),
           },
           'db2Connection',
         ),
