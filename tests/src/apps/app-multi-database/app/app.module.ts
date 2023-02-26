@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MysqlModule } from '../../../lib';
+import { MysqlModule } from '../../../../../lib';
 import { PostModule } from './post/post.module';
 import { UsersModule } from './users/users.module';
 
