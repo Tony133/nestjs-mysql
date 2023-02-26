@@ -7,7 +7,14 @@ services:
        MYSQL_ROOT_USER: root
        MYSQL_ROOT_PASSWORD: root
        MYSQL_DATABASE: test
+    volumes:
+       - db-data:/var/lib/mysql
+       - ./data.sql:/docker-entrypoint-initdb.d/data.sql
+
     ports:
        - "3306:3306"
     restart: always
+
+volumes:
+    db-data:
 

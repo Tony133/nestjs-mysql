@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS test;
+
+USE test;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT(11) AUTO_INCREMENT, 
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(50) NOT NULL, 
+    PRIMARY KEY (id)
+);

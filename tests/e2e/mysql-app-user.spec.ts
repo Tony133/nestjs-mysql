@@ -1,6 +1,5 @@
 import { INestApplication, HttpStatus } from '@nestjs/common';
 import { TestingModule, Test } from '@nestjs/testing';
-import { MysqlModule } from '../../lib';
 import * as request from 'supertest';
 import { UsersModule } from '../src/apps/app-mysql/app/users/users.module';
 import { AppModule } from '../src/apps/app-mysql/app/app.module';
