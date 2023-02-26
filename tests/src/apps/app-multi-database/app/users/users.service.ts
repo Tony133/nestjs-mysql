@@ -5,35 +5,39 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectClient } from '../../../../lib';
+import { Pool } from 'mysql2';
+import { InjectConnection } from '../../../../../../lib';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './interfaces/user.interface';
-import { Connection } from 'mysql2';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectClient() private readonly connection: Connection) {}
+  constructor(
+    @InjectConnection('db1Connection')
+    private dbConnection: Pool,
+  ) {}
 
-  public async findAll(): Promise<User> {
-    const users = await this.connection.query('SELECT * FROM users');
+  public async findAll(): Promise<any> {
+    const users = await this.dbConnection.query('SELECT * FROM users');
     const results = Object.assign([{}], users[0]);
 
     return results;
   }
 
-  public async findOne(id: string): Promise<User> {
+  public async findOne(id: string): Promise<any> {
     if (!id) {
       throw new BadRequestException();
     }
 
-    const user = await this.connection.query('SELECT * FROM users WHERE id=?', [
-      id,
-    ]);
+    const user = await this.dbConnection.query(
+      'SELECT * FROM users WHERE id=?',
+      [id],
+    );
 
     if (!user) {
       throw new NotFoundException();
     }
+
     const result = Object.assign([{}], user[0]);
 
     return result;
@@ -41,10 +45,9 @@ export class UsersService {
 
   public async create(createUserDto: CreateUserDto): Promise<any> {
     try {
-      const { firstName, lastName } = createUserDto;
-      const user = await this.connection.query(
+      const user = await this.dbConnection.query(
         'INSERT INTO users (firstName, lastName)  VALUES (?, ?)',
-        [firstName, lastName],
+        [createUserDto.firstName, createUserDto.lastName],
       );
       return user;
     } catch (err) {
@@ -56,7 +59,7 @@ export class UsersService {
     try {
       const { firstName, lastName } = updateUserDto;
 
-      const user = await this.connection.query(
+      const user = await this.dbConnection.query(
         'UPDATE users SET firstName=?, lastName=? WHERE id=?',
         [firstName, lastName, id],
       );
@@ -71,7 +74,7 @@ export class UsersService {
       throw new BadRequestException();
     }
 
-    const user = await this.connection.query('DELETE FROM users WHERE id=?', [
+    const user = await this.dbConnection.query('DELETE FROM users WHERE id=?', [
       id,
     ]);
     return user;
