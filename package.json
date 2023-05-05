@@ -46,7 +46,7 @@
     "reflect-metadata": "0.1.13",
     "release-it": "15.10.1",
     "rxjs": "7.8.0",
-    "supertest": "6.3.3",
+    "supertest": "^6.3.3",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
     "tsconfig-paths": "4.2.0",
@@ -65,8 +65,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tony133/nestjs-mysql"
-  },
-  "dependencies": {
-    "uuid": "9.0.0"
   }
 }
