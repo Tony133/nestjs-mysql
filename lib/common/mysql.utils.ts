@@ -1,7 +1,7 @@
 import { MysqlModuleOptions } from '../interfaces';
 import { DEFAULT_CONNECTION_NAME } from '../mysql.constants';
 import { Observable } from 'rxjs';
-import { delay, retry, scan } from 'rxjs/operators';
+import { delay, retryWhen, scan } from 'rxjs/operators';
 import { randomUUID } from 'node:crypto';
 import { Logger } from '@nestjs/common';
 import { CircularDependencyException } from '../exceptions/circular-dependency.exception';
@@ -61,24 +61,23 @@ export function handleRetry(
 ): <T>(source: Observable<T>) => Observable<T> {
   return <T>(source: Observable<T>) =>
     source.pipe(
-      retry({
-        delay: (e) =>
-          e.pipe(
-            scan((errorCount, error: Error) => {
-              logger.error(
-                `Unable to connect to the database. Retrying (${
-                  errorCount + 1
-                })...`,
-                error.stack,
-              );
-              if (errorCount + 1 >= retryAttempts) {
-                throw error;
-              }
-              return errorCount + 1;
-            }, 0),
-            delay(retryDelay),
-          ),
-      }),
+      retryWhen((e) =>
+        e.pipe(
+          scan((errorCount, error: Error) => {
+            logger.error(
+              `Unable to connect to the database. Retrying (${
+                errorCount + 1
+              })...`,
+              error.stack,
+            );
+            if (errorCount + 1 >= retryAttempts) {
+              throw error;
+            }
+            return errorCount + 1;
+          }, 0),
+          delay(retryDelay),
+        ),
+      ),
     );
 }
 
