@@ -64,7 +64,7 @@ MySqlModule is the primary entry point for this package and can be used synchron
 ```typescript
 @Module({
   imports: [
-    MySqlModule.forRoot({
+    MysqlModule.forRoot({
         host: 'localhost',
         database: 'test2',
         password: 'root',
@@ -80,7 +80,7 @@ or asynchronously
 ```typescript
 @Module({
   imports: [
-    MySqlModule.forRootAsync({
+    MysqlModule.forRootAsync({
       useFactory: () => ({
         host: 'localhost',
         database: 'test',
@@ -137,7 +137,7 @@ export class UsersController {
 ```typescript
 @Module({
   imports: [
-    MySqlModule.forRootAsync(
+    MysqlModule.forRootAsync(
       {
         useFactory: () => ({
           host: 'localhost',
@@ -149,7 +149,7 @@ export class UsersController {
       },
       'db1Connection',
     ),
-    MySqlModule.forRootAsync(
+    MysqlModule.forRootAsync(
       {
         useFactory: () => ({
           host: 'localhost',
