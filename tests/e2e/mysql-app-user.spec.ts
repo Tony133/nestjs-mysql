@@ -27,6 +27,7 @@ describe('[Feature] User - /user', () => {
       .then(({ body }) => {
         expect(body[0]).toEqual({
           fieldCount: 0,
+          changedRows: 0,
           affectedRows: 1,
           insertId: 1,
           info: '',
