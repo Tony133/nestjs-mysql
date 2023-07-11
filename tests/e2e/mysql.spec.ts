@@ -27,6 +27,7 @@ describe('Mysql', () => {
       .expect(({ body }) => {
         expect(body[0]).toEqual({
           fieldCount: 0,
+          changedRows: 0,
           affectedRows: 1,
           insertId: body[0].insertId,
           info: '',
