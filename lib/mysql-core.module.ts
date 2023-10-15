@@ -27,7 +27,7 @@ export class MysqlCoreModule implements OnApplicationShutdown {
     private readonly moduleRef: ModuleRef,
   ) {}
 
-  static forRoot(
+  public static forRoot(
     options: MysqlModuleOptions,
     connection?: string,
   ): DynamicModule {
