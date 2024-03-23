@@ -101,12 +101,13 @@ UsersService:
 import { Injectable } from '@nestjs/common';
 import { InjectClient } from 'nest-mysql';
 import { Connection } from 'mysql2';
+import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectClient() private readonly connection: Connection) {}
 
-  async findAll() {
+  async findAll(): Promise<User[]> {
     const users = await this.connection.query('SELECT * FROM users');
     const results = Object.assign([{}], users[0]);
 
@@ -120,6 +121,7 @@ UsersController:
 ```typescript
 import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { User } from '../interfaces/user.interface';
 
 @Controller()
 export class UsersController {
@@ -176,6 +178,7 @@ PostService:
 import { Pool } from 'mysql2';
 import { InjectConnection } from 'nest-mysql';
 import { CreatePostDto } from './dto/create-post.dto';
+import { Post } from '../interfaces/post.interface';
 
 @Injectable()
 export class PostService {
@@ -184,14 +187,14 @@ export class PostService {
     private dbConnection: Pool,
   ) {}
 
-  public async findAll(): Promise<User[]> {
+  public async findAll(): Promise<Post[]> {
     const posts = await this.dbConnection.query('SELECT * FROM posts');
     const results = Object.assign([{}], posts[0]);
 
     return results;
   }
 
-  public async create(createPostDto: CreatePostDto): Promise<User> {
+  public async create(createPostDto: CreatePostDto): Promise<Post> {
     try {
       const post = await this.dbConnection.query(
         'INSERT INTO posts (title, description) VALUES (?, ?)',
@@ -211,6 +214,7 @@ UsersService:
 import { Pool } from 'mysql2';
 import { InjectConnection } from 'nest-mysql';
 import { CreateUserDto } from './dto/create-user.dto';
+import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
@@ -219,7 +223,7 @@ export class UsersService {
     private dbConnection: Pool,
   ) {}
 
-  public async findAll(): Promise<Use®[]> {
+  public async findAll(): Promise<User[]> {
     const users = await this.dbConnection.query('SELECT * FROM users');
     const results = Object.assign([{}], users[0]);
 
