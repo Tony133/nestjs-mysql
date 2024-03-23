@@ -126,7 +126,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  async getAllUsers() {
+  async getAllUsers(): Promise<User[]> {
     return await this.usersService.findAll();
   }
 }
@@ -184,14 +184,14 @@ export class PostService {
     private dbConnection: Pool,
   ) {}
 
-  public async findAll(): Promise<any> {
+  public async findAll(): Promise<User[]> {
     const posts = await this.dbConnection.query('SELECT * FROM posts');
     const results = Object.assign([{}], posts[0]);
 
     return results;
   }
 
-  public async create(createPostDto: CreatePostDto): Promise<any> {
+  public async create(createPostDto: CreatePostDto): Promise<User> {
     try {
       const post = await this.dbConnection.query(
         'INSERT INTO posts (title, description) VALUES (?, ?)',
@@ -219,14 +219,14 @@ export class UsersService {
     private dbConnection: Pool,
   ) {}
 
-  public async findAll(): Promise<any> {
+  public async findAll(): Promise<Use®[]> {
     const users = await this.dbConnection.query('SELECT * FROM users');
     const results = Object.assign([{}], users[0]);
 
     return results;
   }
 
-  public async create(createUserDto: CreateUserDto): Promise<any> {
+  public async create(createUserDto: CreateUserDto): Promise<User> {
     try {
       const user = await this.dbConnection.query(
         'INSERT INTO users (firstName, lastName)  VALUES (?, ?)',
