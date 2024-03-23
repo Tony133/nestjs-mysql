@@ -194,7 +194,7 @@ export class PostService {
     return results;
   }
 
-  public async create(createPostDto: CreatePostDto): Promise<Post> {
+  public async create(createPostDto: CreatePostDto): Promise<Post[]> {
     try {
       const post = await this.dbConnection.query(
         'INSERT INTO posts (title, description) VALUES (?, ?)',
@@ -230,7 +230,7 @@ export class UsersService {
     return results;
   }
 
-  public async create(createUserDto: CreateUserDto): Promise<User> {
+  public async create(createUserDto: CreateUserDto): Promise<User[]> {
     try {
       const user = await this.dbConnection.query(
         'INSERT INTO users (firstName, lastName)  VALUES (?, ?)',
