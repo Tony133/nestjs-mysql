@@ -26,4 +26,5 @@ export interface MysqlModuleOptions {
   dateStrings?: boolean;
   multipleStatements?: boolean;
   localInfile?: boolean;
+  pool?: boolean;
 }
