@@ -124,8 +124,13 @@ export class MysqlCoreModule implements OnApplicationShutdown {
   ): Promise<any> {
     return lastValueFrom(
       defer(async () => {
-        const client = mysql.createConnection(options);
-        return client;
+        if (options.pool === true) {
+          const clientPool = mysql.createPool(options);
+          return clientPool;
+        } else {
+          const client = mysql.createConnection(options);
+          return client;
+        }
       }).pipe(handleRetry(options.retryAttempts, options.retryDelay)),
     );
   }
