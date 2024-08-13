@@ -39,6 +39,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install Docker
+        run: |
+          sudo apt-get update
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo sh get-docker.sh
+          sudo usermod -aG docker $USER
+          sudo apt-get install -y docker-compose
       - name: Start Docker-Compose
         run: cd tests && docker-compose up -d
       - name: Install npm
