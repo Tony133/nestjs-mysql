@@ -1,4 +1,4 @@
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AsyncOptionsExistingModule } from '../src/async-existing-options.module';
 import * as request from 'supertest';
@@ -8,7 +8,7 @@ import {
 } from '@nestjs/platform-fastify';
 
 describe('Mysql (async configuration)', () => {
-  let app: INestApplication;
+  let app: NestFastifyApplication;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({

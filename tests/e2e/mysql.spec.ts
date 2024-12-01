@@ -1,4 +1,3 @@
-import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { ApplicationModule } from '../src/app.module';
 import * as request from 'supertest';
@@ -8,7 +7,7 @@ import {
 } from '@nestjs/platform-fastify';
 
 describe('Mysql', () => {
-  let app: INestApplication;
+  let app: NestFastifyApplication;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({

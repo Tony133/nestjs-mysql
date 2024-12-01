@@ -1,4 +1,4 @@
-import { INestApplication, HttpStatus } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 import { TestingModule, Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { UsersModule } from '../src/apps/app-mysql/app/users/users.module';
@@ -9,7 +9,7 @@ import {
 } from '@nestjs/platform-fastify';
 
 describe('[Feature] User - /user', () => {
-  let app: INestApplication;
+  let app: NestFastifyApplication;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
