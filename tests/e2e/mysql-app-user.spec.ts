@@ -3,6 +3,10 @@ import { TestingModule, Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { UsersModule } from '../src/apps/app-mysql/app/users/users.module';
 import { AppModule } from '../src/apps/app-mysql/app/app.module';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 
 describe('[Feature] User - /user', () => {
   let app: INestApplication;
@@ -12,8 +16,11 @@ describe('[Feature] User - /user', () => {
       imports: [AppModule, UsersModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = moduleFixture.createNestApplication<NestFastifyApplication>(
+      new FastifyAdapter(),
+    );
     await app.init();
+    await app.getHttpAdapter().getInstance().ready();
   });
 
   it('should create a new user [POST /users]', () => {
